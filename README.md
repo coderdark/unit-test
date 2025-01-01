@@ -1,9 +1,14 @@
 # Unit-test
 Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing.
 
-##TDD (Test Driven Development)
+## TDD (Test Driven Development)
 + Write your test first which it will fail - red
 + Write you function for the test and should pass - green
+
+## Test Coverage
++ Easy to get to 100%
++ Only counts the code that you test
+
 
 ## Skipped Test
 To skipped a test you can add .todo to the describe. This will skipped the test.  Removing it will excecute the test.
