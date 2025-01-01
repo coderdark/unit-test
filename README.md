@@ -3,11 +3,18 @@ Using vitest (https://vitest.dev/guide/) but this can also be use with Jest test
 
 ## TDD (Test Driven Development)
 Test driven development involves writing a test for a function (hopefully a small function), running the test to fail (since you write the test first before the function implementation) and then writing the code to make the test pass. 
-+ Write your test first which it will fail - red
-+ Write you function for the test and should pass - green
++ Tests primarily unit tests, focusing on low-level functionality and edge cases.
++ Write your test first which it will fail - Red
++ Write you function for the test and should pass - Green
++ Refactor the code for efficiency and clarity - Refactor
++ Unhappy Paths
+  + Undefined
+  + Edge Cases
+  + Be pessimistic
 
 ## BDD (Behavior Driven Development)
 This test are written by developer, product manager or any stakeholder and the test engineer
++ Tests higher-level acceptance tests focusing on business outcomes and user interactions.
 + Derive acceptance criteria to write the test
 + Write test using Gherkin
 + Convert the Gherkin test to executable tests
@@ -15,11 +22,6 @@ This test are written by developer, product manager or any stakeholder and the t
 ## Test Coverage
 + Easy to get to 100%
 + Only counts the code that you test
-
-## Unhappy Path
-+ Undefined
-+ Edge Cases
-+ Be pessimistic
 
 ## Skipped Test
 To skipped a test you can add .todo to the describe. This will skipped the test.  Removing it will excecute the test.
