@@ -23,3 +23,23 @@ describe.todo('add', () => { //this test is skipped
   });
 });
 ```
+## Throw Error
+Here the `toThrow` is looking for `is not`.  As long as the error being thrown has `is not` withing the string it throws, the test pass.
+```
+export const add = (a, b) => {
+  if (typeof a === 'string') a = Number(a);
+  if (typeof b === 'string') b = Number(b);
+
+  if (isNaN(a)) throw new Error('The first argument is not a number');
+  if (isNaN(b)) throw new Error('The second argument is not a number');
+
+  return a + b;
+};
+
+//Test
+it('should get really angry if a first string param can not be parse into a number', () => {
+    expect(() => add('potato', 1)).toThrow(
+      'is not',
+    );
+  });
+```
