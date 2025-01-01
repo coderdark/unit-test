@@ -2,8 +2,15 @@
 Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing.
 
 ## TDD (Test Driven Development)
+Test driven development involves writing a test for a function (hopefully a small function), running the test to fail (since you write the test first before the function implementation) and then writing the code to make the test pass. 
 + Write your test first which it will fail - red
 + Write you function for the test and should pass - green
+
+## BDD (Behavior Driven Development)
+This test are written by developer, product manager or any stakeholder and the test engineer
++ Derive acceptance criteria to write the test
++ Write test using Gherkin
++ Convert the Gherkin test to executable tests
 
 ## Test Coverage
 + Easy to get to 100%
