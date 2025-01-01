@@ -26,6 +26,7 @@ describe.todo('add', () => { //this test is skipped
 ## Throw Error
 Here the `toThrow` is looking for `is not`.  As long as the error being thrown has `is not` withing the string it throws, the test pass.
 ```
+//Implementation
 export const add = (a, b) => {
   if (typeof a === 'string') a = Number(a);
   if (typeof b === 'string') b = Number(b);
