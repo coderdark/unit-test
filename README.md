@@ -9,6 +9,10 @@ Using vitest (https://vitest.dev/guide/) but this can also be use with Jest test
 + Easy to get to 100%
 + Only counts the code that you test
 
+## Unhappy Path
++ Undefined
++ Edge Cases
++ Be pessimistic
 
 ## Skipped Test
 To skipped a test you can add .todo to the describe. This will skipped the test.  Removing it will excecute the test.
