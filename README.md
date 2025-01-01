@@ -25,6 +25,7 @@ describe.todo('add', () => { //this test is skipped
 ```
 ## Throw Error
 Here the `toThrow` is looking for `is not`.  As long as the error being thrown has `is not` withing the string it throws, the test pass.
+Also notice in the test that the expect is not calling the add function directly but it is using an annonymous function that calls the add function since we are throwing an error.
 ```
 //Implementation
 export const add = (a, b) => {
@@ -39,7 +40,7 @@ export const add = (a, b) => {
 
 //Test
 it('should get really angry if a first string param can not be parse into a number', () => {
-    expect(() => add('potato', 1)).toThrow(
+    expect(() => add('potato', 1)).toThrow( //annonymous function is calling the add function here since we are throwing an error
       'is not',
     );
   });
