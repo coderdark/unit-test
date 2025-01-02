@@ -40,8 +40,9 @@ test.fails('add two positive numbers', () => { //this test fails
     expect(add(1, 2)).toBe(4);
 });
 ```
+
 ## Random
-To test random values, you can use `expect.stringContaining(<string_to_find>)`
+To test random values, you can use `expect.stringContaining(<string_to_find>)`. Test the random value if possible.  If not possible then test what you can.
 ```
 describe('person', () => { 
   it('should create a new person', () => {
@@ -81,3 +82,4 @@ it('should get really angry if a first string param can not be parse into a numb
   + does not work for objects
 + toEqual - `expect({id:1,name:'Josh'}).toEqual({id:1,name:'Josh'})`
   + works with objects
+  + test what you can test
