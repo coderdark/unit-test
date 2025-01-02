@@ -135,3 +135,6 @@ afterEach(() => {
 ```
 
 ## ASYNC / AWAIT
+You can use `async` and `await` in your tests
+
+## DOM
