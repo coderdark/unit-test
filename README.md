@@ -54,6 +54,34 @@ describe('person', () => {
 });
 ```
 
+## Object Properties
+To test SOME object properties in an object, you can use `expect.objectContaining`. See example below to see two different ways
+```
+describe('Player', () => {
+  it('should create a player with name, last and role', () => {
+    const player = new Player('Josh', 'Allen', 'Quarterback');
+
+    //// You can do it this way
+    expect(character.firstName).toBe('Josh');
+    expect(character.lastName).toBe('Allen');
+    expect(character.role).toBe('Quarterback');
+
+    //// You can do it this way
+    expect(player).toEqual(
+      expect.objectContaining({
+        firstName: 'Josh',
+        lastName: 'Allen',
+        role: 'Quarterback',
+      }),
+    );
+  });
+
+  it.todo('should allow you to increase the level', () => {});
+
+  it.todo('should update the last modified date when leveling up', () => {});
+});
+```
+
 ## Throw Error
 Here the `toThrow` is looking for `is not`.  As long as the error being thrown has `is not` withing the string it throws, the test pass.
 Also notice in the test that the expect is not calling the add function directly but it is using an annonymous function that calls the add function since we are throwing an error.
