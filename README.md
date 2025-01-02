@@ -410,4 +410,4 @@ describe('Counter ', () => {
 });
 ```
 ## Searching Dom
-Using `screen` from the `@testing-library/react`, you can use the `find` (Async) or `get` methods to find an element within the DOM.  
+Using `screen` from the `@testing-library/react`, you can use the `find` (Async, keeps retrying depending on the timeout provided) or `get` methods to find an element within the DOM.  
