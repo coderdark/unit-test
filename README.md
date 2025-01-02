@@ -210,4 +210,4 @@ describe('createButton', () => {
 ```
 
 ## Testing Playground
-Chrome extension, it is like inspect element but provides the best possible selector for your selected element - https://chromewebstore.google.com/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano
+Chrome extension, it is like inspect element but provides the best possible selector for your selected element. It also provides a sample code to use it with `@testing-library`...example `screen.getRole`  - https://chromewebstore.google.com/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano
