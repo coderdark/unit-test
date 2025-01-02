@@ -153,3 +153,6 @@ export default defineConfig({
   },
 });
 ```
+
+## Testing-Library
+It is a library that provides helpers to work in the DOM. Some of those helpers are `screen`, `render` and etc.
