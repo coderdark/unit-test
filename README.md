@@ -54,7 +54,7 @@ describe('person', () => {
 });
 ```
 
-## Object Properties
+## Object Properties (Example API responses)
 To test SOME object properties in an object, you can use `expect.objectContaining`. See example below to see two different ways
 ```
 describe('Player', () => {
