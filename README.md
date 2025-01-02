@@ -163,7 +163,7 @@ export default defineConfig({
 ```
 
 ## Testing-Library
-It is a library that provides helpers to work in the DOM. Some of those helpers are `screen` (browser window), `render` and etc.  You can import it using vanilla js like `'@testing-library/dom';` or react `'@testing-library/react';` or svelte `'@testing-library/svelte';` or vue `'@testing-library/vue';`
+It is a library that provides helpers to work in the DOM. Some of those helpers are `screen` (browser window), `render` and `act` (act is waits for a rerender).  You can import it using vanilla js like `'@testing-library/dom';` or react `'@testing-library/react';` or svelte `'@testing-library/svelte';` or vue `'@testing-library/vue';`
 + @testing-library/<lib_name>
 ```
 import { screen, fireEvent } from '@testing-library/dom';
@@ -220,29 +220,194 @@ describe('createButton', () => {
 ## Testing React using @testing-library/react
 If your component does not have a way to identify it for testing, Use `data-testid` to provide the element a name to be used in testing.  __When getting an element using `screen.gtByRole` is a good practice/pattern to use case-insensitive regex incase the casing changes in the button or other changes.__ See example below.
 ```
-import { render, screen } from '@testing-library/react';
+//Implementation
+import React from 'react';
+import { useReducer, useEffect } from 'react';
+import { reducer } from './reducer';
+
+export const Counter = ({initialCount = 0}) => {
+  const [state, dispatch] = useReducer(reducer, { count: initialCount });
+  const unit = state.count === 1 ? 'day' : 'days';
+
+  useEffect(() => {
+    window.document.title = `${state.count} ${unit} — Accident Counter`;
+  }, [state.count]);
+
+  return (
+    <main className="flex h-screen items-center justify-center">
+      <div className="space-y-8 rounded-md border border-slate-400 bg-white p-8 text-center shadow-lg">
+        <div className="space-y-4">
+          <div data-testid="counter-count" className="text-8xl font-semibold">
+            {state.count}
+          </div>
+          <p>
+            <span data-testid="counter-unit">{unit}</span> since the last
+            JavaScript-related accident.
+          </p>
+        </div>
+        <div className="flex gap-4">
+          <button onClick={() => dispatch({ type: 'increment' })}>
+            Increment
+          </button>
+          <button
+            onClick={() => dispatch({ type: 'decrement' })}
+            disabled={state.count === 0}
+          >
+            Decrement
+          </button>
+          <button
+            onClick={() => dispatch({ type: 'reset' })}
+            disabled={state.count === 0}
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+
+//Test
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom/vitest';
 
 import { Counter } from './counter';
 
-import '@testing-library/jest-dom/vitest';
-
 describe('Counter ', () => {
-  beforeEach(() => {
-    render(<Counter />);
-  });
-
   it('renders with an initial count of 0', () => {
+    render(<Counter />);
     const counter = screen.getByTestId('counter-count');
     expect(counter).toHaveTextContent('0');
   });
 
-  it('disables the "Decrement" and "Reset" buttons when the count is 0', ()=>{ 
-    const decrementButton = screen.getByRole('button', { name: /decrement/i }); //using case insensitive pattern
-    const resetButton = screen.getByRole('button', { name: /reset/i }); ////using case insensitive pattern
+  it('disables the "Decrement" and "Reset" buttons when the count is 0', () => {
+    render(<Counter />);
+    const decrementButton = screen.getByRole('button', { name: /decrement/i });
+    const resetButton = screen.getByRole('button', { name: /reset/i });
 
     expect(decrementButton).toBeDisabled();
     expect(resetButton).toBeDisabled();
   });
+
+  it('displays "days" when the count is 0', () => {
+    render(<Counter />);
+    const unit = screen.getByTestId('counter-unit');
+
+    expect(unit).toHaveTextContent('days');
+  });
+
+  it('increments the count when the "Increment" button is clicked', async () => {
+    render(<Counter />);
+    const counter = screen.getByTestId('counter-count');
+    const incrementButton = screen.getByRole('button', {
+      name: /increment/i,
+    });
+
+    //await userEvent.click(incrementButton); //this may not work because the dom needs to be rerendered
+
+    await act(async () => {
+      await userEvent.click(incrementButton);
+    });
+
+    expect(counter).toHaveTextContent('1');
+  });
+
+  it('displays "day" when the count is 1', async () => {
+    render(<Counter initialCount={1} />);
+    const unit = screen.getByTestId('counter-unit');
+    // const button = screen.getByRole('button', {
+    //   name: /increment/i,
+    // });
+    //
+    // await act(async () => {
+    //   await userEvent.click(button);
+    // })
+
+    expect(unit).toHaveTextContent('day');
+  });
+
+  it('decrements the count when the "Decrement" button is clicked', async () => {
+    render(<Counter initialCount={2} />);
+    const counter = screen.getByTestId('counter-count');
+    const decrementButton = screen.getByRole('button', {
+      name: /decrement/i,
+    });
+
+    expect(decrementButton).not.toBeDisabled();
+
+    await act(async () => {
+      await userEvent.click(decrementButton);
+    });
+
+    expect(counter).toHaveTextContent('1');
+  });
+
+  it('does not allow decrementing below 0', async () => {
+    render(<Counter />);
+    const counter = screen.getByTestId('counter-count');
+    const button = screen.getByRole('button', {
+      name: /decrement/i,
+    });
+
+    await act(async () => {
+      await userEvent.click(button);
+    });
+
+    expect(counter).toHaveTextContent('0');
+  });
+
+  it('resets the count when the "Reset" button is clicked', async () => {
+    render(<Counter />);
+    const counter = screen.getByTestId('counter-count');
+    const ibutton = screen.getByRole('button', {
+      name: /increment/i,
+    });
+    const rbutton = screen.getByRole('button', {
+      name: /reset/i,
+    });
+
+    await userEvent.click(ibutton);
+
+    expect(counter).toHaveTextContent('1');
+
+    await userEvent.click(rbutton);
+
+    expect(counter).toHaveTextContent('0');
+  });
+
+  it('disables the "Decrement" and "Reset" buttons when the count is 0', () => {
+    render(<Counter />);
+    const counter = screen.getByTestId('counter-count');
+    const ibutton = screen.getByRole('button', {
+      name: /increment/i,
+    });
+    const dbutton = screen.getByRole('button', {
+      name: /decrement/i,
+    });
+    const rbutton = screen.getByRole('button', {
+      name: /reset/i,
+    });
+
+    expect(counter).toHaveTextContent('0');
+    expect(dbutton).toBeDisabled();
+    expect(rbutton).toBeDisabled();
+  });
+
+  it('updates the document title based on the count', async () => {
+    render(<Counter />);
+    const incrementButton = screen.getByRole('button', {
+      name: /increment/i,
+    });
+
+    await act(async () => {
+      await userEvent.click(incrementButton);
+    });
+
+    expect(document.title).toEqual(expect.stringContaining('1 day'));
+  });
 });
+
 ```
 
