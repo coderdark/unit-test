@@ -138,3 +138,4 @@ afterEach(() => {
 You can use `async` and `await` in your tests
 
 ## DOM
+Your test run on node, node does not have the DOM api like the browser does.  In test you have to fake the dom.  Jest uses JSDOM, vitest uses JSDOM or HAPPY DOM.  Vitest allows the user to choose between JSDOM or HAPPY DOM.
