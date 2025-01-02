@@ -40,7 +40,18 @@ test.fails('add two positive numbers', () => { //this test fails
     expect(add(1, 2)).toBe(4);
 });
 ```
-
+## Random
+To test random values, you can use `expect.stringContaining(<string_to_find>)`
+```
+describe('person', () => { 
+  it('should create a new person', () => {
+    expect(person).toEqual({
+      id: expect.stringContaining('person-'),
+      name: 'Josh Allen'
+    });
+  });
+});
+```
 
 ## Throw Error
 Here the `toThrow` is looking for `is not`.  As long as the error being thrown has `is not` withing the string it throws, the test pass.
