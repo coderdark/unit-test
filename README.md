@@ -1,5 +1,5 @@
 # Unit-test
-Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing.
+Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing. Make your test simple and short!!!
 
 ## Resources
 + JEST (Expect): https://jestjs.io/docs/expect
