@@ -1,5 +1,9 @@
 # Unit-test
-Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing. Make your test simple and short when possible!!!
+Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing.
+
+## NOTES
++ Make your test simple and short when possible!!!
++ Dont attach your test to your styles - meaning dont use css styles names to test an element.  css styles name get apply to different elements and the name could change.
 
 ## Resources
 + JEST (Expect): https://jestjs.io/docs/expect
