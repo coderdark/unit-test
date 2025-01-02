@@ -194,7 +194,7 @@ describe('createButton', () => {
 });
 ```
 + @testing-library/user-event
-This package allows you to perform user events like mouse click, mouse enter.  It is a layer of abstraction to simulate user events on your web app / browser page. Under the hood, `user-event` package uses `fireEvent` (low level api).  https://stackoverflow.com/questions/64006345/react-testing-library-when-to-use-userevent-click-and-when-to-use-fireevent
+This package allows you to perform user events like mouse click, mouse enter. You must use `async`/`await` for your function when using package. It is a layer of abstraction to simulate user events on your web app / browser page. Under the hood, `user-event` package uses `fireEvent` (low level api).  https://stackoverflow.com/questions/64006345/react-testing-library-when-to-use-userevent-click-and-when-to-use-fireevent
 ```
 import { screen, fireEvent } from '@testing-library/dom';
 import { createButton } from './button.js';
