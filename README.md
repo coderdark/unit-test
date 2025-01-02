@@ -4,6 +4,7 @@ Using vitest (https://vitest.dev/guide/) but this can also be use with Jest test
 ## NOTES
 + Make your test simple and short when possible!!!
 + Dont attach your test to your styles - meaning dont use css styles names to test an element.  css styles name get apply to different elements and the name could change.
++ Use `data-testid` to provide the element a name to be used in testing
 
 ## Resources
 + JEST (Expect): https://jestjs.io/docs/expect
@@ -30,6 +31,9 @@ This test are written by developer, product manager or any stakeholder and the t
 ## Test Coverage
 + Easy to get to 100%
 + Only counts the code that you test
+
+## Testing Playground Extension
+Chrome extension, it is like inspect element but provides the best possible selector for your selected element. It also provides a sample code to use it with `@testing-library`...example `screen.getRole`  - https://chromewebstore.google.com/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano
 
 ## Run Test
 + `npm test` - runs all the test
@@ -213,5 +217,27 @@ describe('createButton', () => {
 });
 ```
 
-## Testing Playground
-Chrome extension, it is like inspect element but provides the best possible selector for your selected element. It also provides a sample code to use it with `@testing-library`...example `screen.getRole`  - https://chromewebstore.google.com/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano
+## Testing React using @testing-library/react
+If your component does not have a way to identify it for testing, Use `data-testid` to provide the element a name to be used in testing.
+```
+import { render, screen } from '@testing-library/react';
+
+import { Counter } from './counter';
+
+import '@testing-library/jest-dom/vitest';
+
+describe('Counter ', () => {
+  beforeEach(() => {
+    render(<Counter />);
+  });
+
+  it('renders with an initial count of 0', () => {
+    const counter = screen.getByTestId('counter-count');
+    expect(counter).toHaveTextContent('0');
+  });
+
+  it.todo('disables the "Decrement" and "Reset" buttons when the count is 0');
+});
+
+```
+
