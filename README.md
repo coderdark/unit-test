@@ -218,7 +218,7 @@ describe('createButton', () => {
 ```
 
 ## Testing React using @testing-library/react
-If your component does not have a way to identify it for testing, Use `data-testid` to provide the element a name to be used in testing.
+If your component does not have a way to identify it for testing, Use `data-testid` to provide the element a name to be used in testing.  __When getting an element using `screen.gtByRole` is a good practice/pattern to use case-insensitive regex incase the casing changes in the button or other changes.__ See example below.
 ```
 import { render, screen } from '@testing-library/react';
 
@@ -236,8 +236,13 @@ describe('Counter ', () => {
     expect(counter).toHaveTextContent('0');
   });
 
-  it.todo('disables the "Decrement" and "Reset" buttons when the count is 0');
-});
+  it('disables the "Decrement" and "Reset" buttons when the count is 0', ()=>{ 
+    const decrementButton = screen.getByRole('button', { name: /decrement/i }); //using case insensitive pattern
+    const resetButton = screen.getByRole('button', { name: /reset/i }); ////using case insensitive pattern
 
+    expect(decrementButton).toBeDisabled();
+    expect(resetButton).toBeDisabled();
+  });
+});
 ```
 
