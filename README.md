@@ -396,8 +396,8 @@ describe('Counter ', () => {
   });
 
   it('updates the document title based on the count', async () => {
-    render(<Counter />);
-    const incrementButton = screen.getByRole('button', {
+    const { getByRole } = render(<Counter />);
+    const incrementButton = getByRole('button', {
       name: /increment/i,
     });
 
