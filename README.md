@@ -208,3 +208,6 @@ describe('createButton', () => {
   });
 });
 ```
+
+## Testing Playground
+Chrome extension, it is like inspect element but provides the best possible selector for your selected element - https://chromewebstore.google.com/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano
