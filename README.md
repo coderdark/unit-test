@@ -117,3 +117,19 @@ it('should get really angry if a first string param can not be parse into a numb
 + toEqual - `expect({id:1,name:'Josh'}).toEqual({id:1,name:'Josh'})`
   + works with objects
   + test what you can test
+ 
+## Before or After Hooks
+If you need to repeat the creation of an object in each test or clean some settings after each test runs, you can use `beforeEach`, `beforeAll` or `afterEach`, `afterAll` respectevly.
+```
+const player = null;
+
+beforeEach(() => {
+  // creates a player before each test
+   player = new Player('Josh', 'Allen', 'Quarterback');
+})
+
+afterEach(() => {
+  // creates a player before each test
+   player = null
+})
+```
