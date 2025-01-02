@@ -139,3 +139,13 @@ You can use `async` and `await` in your tests
 
 ## DOM
 Your test run on node, node does not have the DOM api like the browser does.  In tests you have to fake the DOM, it is design to act like a browser. May is have some issues with browswer-specific stuff.  Jest uses `JSDOM`, vitest uses `JSDOM` or `HAPPY DOM` (Small and Lightweight).  Vitest allows the user to choose between JSDOM or HAPPY DOM.
++ Setting Up Vitest
+```
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom', //or 'happy-dom'
+    setupFiles: ['@testing-library/jest-dom/vitest'],
+  },
+});
+```
