@@ -119,7 +119,7 @@ it('should get really angry if a first string param can not be parse into a numb
   + test what you can test
  
 ## Before or After Hooks
-If you need to repeat the creation of an object in each test or clean some settings after each test runs, you can use `beforeEach`, `beforeAll` or `afterEach`, `afterAll` respectevly.
+If you need to repeat the creation of an object in each test or clean some settings after each test runs, you can use `beforeEach`, `beforeAll` or `afterEach`, `afterAll` respectevly. You can use `async` or `await` in these hooks.
 ```
 const player = null;
 
@@ -133,3 +133,5 @@ afterEach(() => {
    player = null
 })
 ```
+
+## ASYNC / AWAIT
