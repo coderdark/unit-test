@@ -155,4 +155,4 @@ export default defineConfig({
 ```
 
 ## Testing-Library
-It is a library that provides helpers to work in the DOM. Some of those helpers are `screen`, `render` and etc.
+It is a library that provides helpers to work in the DOM. Some of those helpers are `screen`, `render` and etc.  You can import it using vanilla js like `'@testing-library/dom';` or react `'@testing-library/react';` or svelte `'@testing-library/svelte';` or vue `'@testing-library/vue';`
