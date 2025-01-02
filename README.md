@@ -284,8 +284,8 @@ describe('Counter ', () => {
 
   it('disables the "Decrement" and "Reset" buttons when the count is 0', () => {
     render(<Counter />);
-    const decrementButton = screen.getByRole('button', { name: /decrement/i });
-    const resetButton = screen.getByRole('button', { name: /reset/i });
+    const decrementButton = screen.getByRole('button', { name: /decrement/i }); //case insensitive pattern 
+    const resetButton = screen.getByRole('button', { name: /reset/i });  //case insensitive pattern 
 
     expect(decrementButton).toBeDisabled();
     expect(resetButton).toBeDisabled();
