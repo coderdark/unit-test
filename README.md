@@ -27,6 +27,10 @@ This test are written by developer, product manager or any stakeholder and the t
 + Easy to get to 100%
 + Only counts the code that you test
 
+## Run Test
++ `npm test` - runs all the test
++ `npm test button` - will run only the button files (in vitest, need to confirm in jest)
+
 ## Skipped Test
 To skipped a test you can add `.todo` to the describe. This will skipped the test.  Removing it will excecute the test.
 ```
@@ -138,7 +142,7 @@ afterEach(() => {
 You can use `async` and `await` in your tests
 
 ## DOM
-Your test run on node, node does not have the DOM api like the browser does.  In tests you have to fake the DOM, it is design to act like a browser. May is have some issues with browswer-specific stuff.  Jest uses `JSDOM`, vitest uses `JSDOM` or `HAPPY DOM` (Small and Lightweight).  Vitest allows the user to choose between JSDOM or HAPPY DOM the default environment is `NODE`.
+Your test run on node, node does not have the DOM api like the browser does.  In tests you have to fake the DOM, it is design to act like a browser. May is have some issues with browswer-specific stuff.  Jest uses `JSDOM`, vitest uses `JSDOM` or `HAPPY DOM` (Small and Lightweight). You may need to install these packages individually.  Vitest allows the user to choose between JSDOM or HAPPY DOM the default environment is `NODE`.
 + Setting Up Vitest
 ```
 export default defineConfig({
