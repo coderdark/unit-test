@@ -1,6 +1,10 @@
 # Unit-test
 Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing.
 
+## Resources
++ JEST (Expect): https://jestjs.io/docs/expect
++ VITEST (Expect): https://vitest.dev/api/expect.html
+
 ## TDD (Test Driven Development)
 Test driven development involves writing a test for a function (hopefully a small function), running the test to fail (since you write the test first before the function implementation) and then writing the code to make the test pass. 
 + Tests primarily unit tests, focusing on low-level functionality and edge cases.
@@ -42,6 +46,7 @@ test.fails('add two positive numbers', () => { //this test fails
 ```
 
 ## Random
++ `expect.stringContaining`
 To test random values, you can use `expect.stringContaining(<string_to_find>)`. Test the random value if possible.  If not possible then test what you can.
 ```
 describe('person', () => { 
@@ -53,6 +58,7 @@ describe('person', () => {
   });
 });
 ```
++ `expect.any(Number|String)`
 
 ## Object Properties (Example API responses)
 To test SOME object properties in an object, you can use `expect.objectContaining`. See example below to see two different ways
