@@ -24,7 +24,7 @@ This test are written by developer, product manager or any stakeholder and the t
 + Only counts the code that you test
 
 ## Skipped Test
-To skipped a test you can add .todo to the describe. This will skipped the test.  Removing it will excecute the test.
+To skipped a test you can add `.todo` to the describe. This will skipped the test.  Removing it will excecute the test.
 ```
 describe.todo('add', () => { //this test is skipped
   it('should add two positive numbers', () => {
@@ -32,6 +32,16 @@ describe.todo('add', () => { //this test is skipped
   });
 });
 ```
+
+## Failed Test
+To fail a test you can add `.fails` to the test.  This will fail the test. 
+```
+test.fails('add two positive numbers', () => { //this test fails
+    expect(add(1, 2)).toBe(4);
+});
+```
+
+
 ## Throw Error
 Here the `toThrow` is looking for `is not`.  As long as the error being thrown has `is not` withing the string it throws, the test pass.
 Also notice in the test that the expect is not calling the add function directly but it is using an annonymous function that calls the add function since we are throwing an error.
@@ -54,3 +64,9 @@ it('should get really angry if a first string param can not be parse into a numb
     );
   });
 ```
+
+## Referencial Equality
++ toBe - `expect('a').toBe('a')
+  + does not work for objects
++ toEqual
+  + works with objects
