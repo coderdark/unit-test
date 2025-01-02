@@ -156,19 +156,55 @@ export default defineConfig({
 
 ## Testing-Library
 It is a library that provides helpers to work in the DOM. Some of those helpers are `screen` (browser window), `render` and etc.  You can import it using vanilla js like `'@testing-library/dom';` or react `'@testing-library/react';` or svelte `'@testing-library/svelte';` or vue `'@testing-library/vue';`
++ @testing-library/<lib_name>
 ```
-import { screen } from '@testing-library/dom';
+import { screen, fireEvent } from '@testing-library/dom';
 import { createButton } from './button.js';
 
 describe('createButton', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+  })
+
   it('should create a button element', () => {
-    const button = createButton();
+    document.body.appendChild(createButton());
 
-    document.body.appendChild(button);
+    const button = screen.getByRole('button', { name: 'Click Me' });
 
-    const buttonOnScreen = screen.getByRole('button', { name: 'Click Me' });
+    expect(button).toBeInTheDocument()
+  });
 
-    expect(buttonOnScreen).toBeInTheDocument()
+  it('should have the text "Click Me"', () => {
+    document.body.appendChild(createButton());
+
+    const button = screen.getByRole('button', { name: 'Click Me' });
+
+    fireEvent(button, new MouseEvent('click'));
+
+    expect(button.textContent).toBe('Clicked!');
+  });
+});
+```
++ @testing-library/user-event
+This package allows you to perform user events like mouse click, mouse enter.  It is a layer of abstraction to simulate user events on your web app / browser page.
+```
+import { screen, fireEvent } from '@testing-library/dom';
+import { createButton } from './button.js';
+import userEvent from '@testing-library/user-event';
+
+describe('createButton', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+  })
+
+  it('should change the text to "Clicked!" when clicked', async () => {
+    document.body.appendChild(createButton());
+
+    const button = screen.getByRole('button', { name: 'Click Me' });
+
+   await userEvent.click(button);
+   
+    expect(button.textContent).toBe('Clicked!');
   });
 });
 ```
