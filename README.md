@@ -58,7 +58,7 @@ describe('person', () => {
   });
 });
 ```
-+ `expect.any(Number|String)`
++ `expect.any(Number|Date)`
 
 ## Object Properties (Example API responses)
 To test SOME object properties in an object, you can use `expect.objectContaining`. See example below to see two different ways
