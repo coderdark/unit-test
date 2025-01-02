@@ -408,6 +408,6 @@ describe('Counter ', () => {
     expect(document.title).toEqual(expect.stringContaining('1 day'));
   });
 });
-
 ```
-
+## Searching Dom
+Using `screen` from the `@testing-library/react`, you can use the `find` (Async) or `get` methods to find an element within the DOM.  
