@@ -77,7 +77,7 @@ it('should get really angry if a first string param can not be parse into a numb
 ```
 
 ## Referencial Equality
-+ toBe - `expect('a').toBe('a')
++ toBe - `expect('a').toBe('a')`
   + does not work for objects
-+ toEqual
++ toEqual - `expect({id:1,name:'Josh'}).toEqual({id:1,name:'Josh'})`
   + works with objects
