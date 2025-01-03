@@ -537,4 +537,79 @@ describe('logger', () => {
 ```
 
 ## Mocking Dependencies
+Note: You can follow the example below to mock some of the dependencies.  It is recommended to create components that have as little external dependcies as possible and actually pass the values into the component so testing can be done easier.  The code below can be refactored to make the test easier.
+```
+//Code
+//send-to-server.js
+export const sendToServer = (level, message) => {
+  return `You must mock this function: sendToServer(${level}, ${message})`;
+};
 
+import { sendToServer } from './send-to-server';
+
+export function log(message) { // <=== to make this function easier to test, you can pass the mode, message, sendToServer.
+  if (import.meta.env.MODE !== 'production') { <== this needs to be mock
+    console.log(message);
+  } else {
+    sendToServer('info', message); <== this needs to be mock
+  }
+}
+
+//Refactored log
+export function log(message, mode, prodServer = (level, message)=>sendToServer(level, message) { // <=== Refactored for easier test
+  if (import.meta.env.MODE !== 'production') {
+    console.log(message);
+  } else {
+    prodServer('info', message);
+  }
+}
+
+//Test
+import { expect, it, vi, beforeEach, afterEach, describe } from 'vitest';
+import { log } from './log';
+
+vi.mock('./send-to-server', () => {
+  return { sendToServer: vi.fn() };
+});
+
+import {sendToServer} from './send-to-server';
+
+describe('logger', () => {
+  describe('development', () => {
+    beforeEach(() => {
+      vi.stubEnv('MODE', 'development'); <== you would not be needing this if the log function gets refactor to have less internal dependencies
+    });
+
+    afterEach(() => {
+      vi.resetAllMocks(); <== you would not be needing this if the log function gets refactor to have less internal dependencies
+    });
+
+    it('logs to console in development', () => {
+      const logSpy = vi.spyOn(console, 'log'); <== you would not be needing this if the log function gets refactor to have less internal dependencies
+
+      log('Hello World!');
+
+      expect(logSpy).toHaveBeenCalledWith('Hello World!');
+    });
+  });
+
+  describe('production', () => {
+    beforeEach(() => {
+      vi.stubEnv('MODE', 'production'); <== you would not be needing this if the log function gets refactor to have less internal dependencies
+    });
+
+    afterEach(() => {
+      vi.resetAllMocks(); <== you would not be needing this if the log function gets refactor to have less internal dependencies
+    });
+
+    it('logs to console in development', () => {
+      const logSpy = vi.spyOn(console, 'log'); <== you would not be needing this if the log function gets refactor to have less internal dependencies
+
+      log('Hello World!');
+
+      expect(logSpy).not.toHaveBeenCalled();
+      expect(sendToServer).toHaveBeenCalled;
+    });
+  });
+});
+```
