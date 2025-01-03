@@ -647,7 +647,7 @@ describe('delay function', () => {
 ```
 
 ## End to End Testing
-+ Playwright - https://playwright.dev/
++ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal,
 ```
 import { test, expect } from '@playwright/test';
 
