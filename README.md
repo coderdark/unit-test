@@ -537,7 +537,7 @@ describe('logger', () => {
 ```
 
 ## Mocking Dependencies
-Note: You can follow the example below to mock some of the dependencies.  It is recommended to create components that have as little external dependcies as possible and actually pass the values into the component so testing can be done easier.  The code below can be refactored to make the test easier.
+Note: You can follow the example below to mock some of the dependencies.  It is recommended to create components that have as little external depencies as possible and actually pass the values into the component so testing can be done easier. Make your component reusable.  The code below can be refactored to make the test easier.
 ```
 //Code
 //send-to-server.js
