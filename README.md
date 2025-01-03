@@ -647,8 +647,9 @@ describe('delay function', () => {
 ```
 
 ## End to End Testing
-+ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal.  Very similar syntax to unit testing (see code above) but this is for end to end testing.
++ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal.  Very similar syntax to unit testing (see code above) but this is for end to end testing. This testing is slower than unit testing.
 ```
+//Sample 1
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
@@ -670,4 +671,20 @@ test('it should add a task', async ({ page }) => {
 
   await expect(heading).toBeVisible();
 });
+
+//Sample 2
+import { test, expect } from '@playwright/test';
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('http://localhost:5173'); //<= playwright will connect to your site for testing
+});
+
+test('it has a counter', async ({ page }) => {
+  //await page.getByTestId('counter-count');
+  const count = page.getByText(/counter-count/i);
+  const incrementButton = page.getByRole('button', { name: /increment/i });
+
+  await incrementButton.click();
+});
+
 ```
