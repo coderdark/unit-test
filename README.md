@@ -639,7 +639,7 @@ describe('delay function', () => {
     const callback = vi.fn();
 
     delay(callback);
-    vi.advanceTimersByTime(1001)
+    vi.advanceTimersByTime(1001) // <= you can also use `vi.advanceTimersToNextTimer()` to move the timer forward without the need of entering seconds.
 
     expect(callback).toHaveBeenCalled();
   });
