@@ -419,8 +419,8 @@ describe('Counter ', () => {
 ## Searching Dom
 Using `screen` from the `@testing-library/react`, you can use the `find` (Async, keeps retrying depending on the timeout provided) or `get` methods to find an element within the DOM.  
 
-## Spies, Mocks, Stubs
-To fake methods or values in your testing. `mocks` are placeholders with your custom code for functions. `spy` are spies for functions and methods. `vi` is for vitest and `jest` is for jest when mocking, spying and stubbing.
+## Mocks
+To fake methods or values in your testing. `mocks` are placeholders with your custom code for functions. `spy` are spies for functions and methods. `vi` is for vitest and `jest` is for jest when mocking, spying and stubbing. You can learn about mocks, stubs and spies here: https://phalanxhead.dev/jest-book/jest/mock_stub_spy.html
 + Spy - https://vitest.dev/guide/mocking.html#spy-on-an-object-returned-from-a-function
 
 Here `spy` is spying for any time the `console.log` method is called. 
