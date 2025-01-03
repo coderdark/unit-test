@@ -411,3 +411,38 @@ describe('Counter ', () => {
 ```
 ## Searching Dom
 Using `screen` from the `@testing-library/react`, you can use the `find` (Async, keeps retrying depending on the timeout provided) or `get` methods to find an element within the DOM.  
+
+## Spies, Mocks, Stubs
+To fake methods or values in your testing. `mocks` are placeholders for functions. `spy` are spies for functions and methods.
++ Spy
+Here `spy` is spying for any time the `console.log` method is called. 
+```
+import { test, expect, vi } from 'vitest';
+
+const logSpy = vi.spyOn(console, 'log');
+
+test('a super simple test', () => {
+  console.log('Hello World');
+
+  expect(logSpy).toHaveBeenCalled();
+  expect(logSpy).toHaveBeenCalledWith('Hello World');
+});
+```
++ Mocks
+Here `mock` is mocking a function. 
+```
+import { test, expect, vi } from 'vitest';
+
+
+test('a super simple test', () => {
+  const mockFn = vi.fn();
+
+  mockFn('Hello World')
+
+  expect(mockFn).toHaveBeenCalled();
+  expect(mockFn).toHaveBeenCalledWith('Hello World');
+  expect(mockFn).toHaveBeenCalledTimes(1);
+});
+```
+
+
