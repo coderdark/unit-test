@@ -57,6 +57,14 @@ test.fails('add two positive numbers', () => { //this test fails
 });
 ```
 
+## Only Test
+To only run the selected test, use the  `.only` method.  This will only run that test. 
+```
+test.only('add two positive numbers', () => { //this test fails
+    expect(add(1, 2)).toBe(4);
+});
+```
+
 ## Random
 + `expect.stringContaining`
 To test random values, you can use `expect.stringContaining(<string_to_find>)`. Test the random value if possible.  If not possible then test what you can.
