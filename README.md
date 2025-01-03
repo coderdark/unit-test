@@ -489,5 +489,11 @@ test('a super simple test', () => {
   expect(mockFn).toHaveBeenCalledTimes(1);
 });
 ```
+
+## Stubs
+```
+
+```
+
 ## Mocking Dependencies
 
