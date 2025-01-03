@@ -417,6 +417,7 @@ To fake methods or values in your testing. `mocks` are placeholders for function
 + Spy
 Here `spy` is spying for any time the `console.log` method is called. 
 ```
+//First Example
 import { test, expect, vi } from 'vitest';
 
 const logSpy = vi.spyOn(console, 'log');
@@ -426,6 +427,17 @@ test('a super simple test', () => {
 
   expect(logSpy).toHaveBeenCalled();
   expect(logSpy).toHaveBeenCalledWith('Hello World');
+});
+
+//Second Example
+import { test, expect, vi } from 'vitest';
+
+const randomSpy = vi.spyOn(Math, 'random').mockImplementation(() => 0.5);
+
+test('a super simple test', () => {
+  const result = Math.random();
+
+  expect(result).toBe(0.5);
 });
 ```
 + Mocks
