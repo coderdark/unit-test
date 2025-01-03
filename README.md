@@ -647,7 +647,7 @@ describe('delay function', () => {
 ```
 
 ## End to End Testing
-+ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal.  Very similar syntax to unit testing (see code above) but this is for end to end testing. This testing is slower than unit testing.
++ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal.  Very similar syntax to unit testing (see code above) but this is for end to end testing. This testing is slower than unit testing. Playwright also has the capability of record your responses.
 ```
 //Sample 1
 import { test, expect } from '@playwright/test';
@@ -724,5 +724,11 @@ export const handlers = [
   http.get('/api/tasks', async (req, res) => {
     return HttpResponse.json(tasks);
   }),
+  http.post('/api/tasks', async (req, res) => {
+    const {title} = req.requestId
+    const task = createTask(title);
+
+    return HttpResponse.json(task);
+  })
 ];
 ```
