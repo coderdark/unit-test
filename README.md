@@ -491,8 +491,48 @@ test('a super simple test', () => {
 ```
 
 ## Stubs
+stubs can help you to fake your environment such as in the example below.
 ```
+import { expect, it, vi, beforeEach, afterEach, describe } from 'vitest';
+import { log } from './log';
 
+describe('logger', () => {
+  describe('development', () => {
+    beforeEach(() => {
+      vi.stubEnv('MODE', 'development'); //stubbing the environment to development
+    });
+
+    afterEach(()=>{
+      vi.resetAllMocks()
+    })
+
+    it('logs to console in development', () => {
+      const logSpy = vi.spyOn(console, 'log');
+
+      log('Hello World!');
+
+      expect(logSpy).toHaveBeenCalledWith('Hello World!');
+    })
+  });
+
+  describe('production', () => {
+    beforeEach(() => {
+      vi.stubEnv('MODE', 'production');  //stubbing the environment to production
+    });
+
+    afterEach(()=>{
+      vi.resetAllMocks()
+    })
+
+    it('logs to console in development', () => {
+      const logSpy = vi.spyOn(console, 'log');
+
+      log('Hello World!');
+
+      expect(logSpy).not.toHaveBeenCalled();
+    })
+  });
+});
 ```
 
 ## Mocking Dependencies
