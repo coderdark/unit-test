@@ -613,7 +613,7 @@ describe('logger', () => {
   });
 });
 ```
-With timers
+With timers - holding time and then move it forward as needed
 ```
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
