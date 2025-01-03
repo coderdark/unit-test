@@ -644,5 +644,7 @@ describe('delay function', () => {
     expect(callback).toHaveBeenCalled();
   });
 });
-
 ```
+
+## End to End Testing
++ Playwright
