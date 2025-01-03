@@ -647,7 +647,7 @@ describe('delay function', () => {
 ```
 
 ## End to End Testing
-+ Playwright - example
++ Playwright - https://playwright.dev/
 ```
 import { test, expect } from '@playwright/test';
 
