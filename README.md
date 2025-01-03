@@ -686,5 +686,44 @@ test('it has a counter', async ({ page }) => {
 
   await incrementButton.click();
 });
+```
+
+## Service Worker Mocks
+This basically mocks server request without hitting the real server - https://mswjs.io/
+```
+import { http, HttpResponse } from 'msw';
+
+const tasks = [
+  {
+    id: '1',
+    title: 'Buy Pizza',
+    completed: true,
+    createdAt: '2024-09-19T08:30:00.711Z',
+    lastModified: '2024-09-19T08:30:00.711Z',
+  },
+  {
+    id: '2',
+    title: 'Exercise',
+    completed: false,
+    createdAt: '2024-09-19T08:31:00.261Z',
+    lastModified: '2024-09-19T08:31:00.261Z',
+  },
+];
+
+let id = 3;
+
+const createTask = (title) => ({
+  id: `${id++}`,
+  title,
+  completed: false,
+  createdAt: new Date('02-29-2024').toISOString(),
+  lastModified: new Date('02-29-2024').toISOString(),
+});
+
+export const handlers = [
+  http.get('/api/tasks', async (req, res) => {
+    return HttpResponse.json(tasks);
+  }),
+];
 
 ```
