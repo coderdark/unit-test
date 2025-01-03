@@ -422,7 +422,7 @@ Using `screen` from the `@testing-library/react`, you can use the `find` (Async,
 
 ## Spies, Mocks, Stubs
 To fake methods or values in your testing. `mocks` are placeholders with your custom code for functions. `spy` are spies for functions and methods. `vi` is for vitest and `jest` is for jest when mocking, spying and stubbing.
-+ Spy
++ Spy - https://vitest.dev/guide/mocking.html#spy-on-an-object-returned-from-a-function
 Here `spy` is spying for any time the `console.log` method is called. 
 ```
 //First Example
@@ -473,7 +473,7 @@ describe('AlertButton', () => {
 });
 ```
 
-+ Mocks
++ Mocks - https://vitest.dev/guide/mocking.html#mock-exported-variables
 Here `mock` is mocking a function. 
 ```
 import { test, expect, vi } from 'vitest';
@@ -489,8 +489,7 @@ test('a super simple test', () => {
   expect(mockFn).toHaveBeenCalledTimes(1);
 });
 ```
-
-## Stubs
++ Stubs - https://vitest.dev/guide/mocking.html#mock-import-meta-env
 stubs can help you to fake your environment such as in the example below.
 ```
 import { expect, it, vi, beforeEach, afterEach, describe } from 'vitest';
