@@ -647,7 +647,7 @@ describe('delay function', () => {
 ```
 
 ## End to End Testing
-+ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal,
++ Playwright - https://playwright.dev/.  You may need to install playwright in your machine if you get any errors like `Error: browserType.launch: Executable doesn't exist`. To install playwright type `npx playwright install` in your terminal. To run playwright with a UI type `npx playwright test --ui` in your terminal.  Very similar syntax to unit testing (see code above) but this is for end to end testing.
 ```
 import { test, expect } from '@playwright/test';
 
