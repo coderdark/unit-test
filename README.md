@@ -1,4 +1,4 @@
-# Unit-test
+# Unit-Test
 Using vitest (https://vitest.dev/guide/) but this can also be use with Jest testing.
 
 ## NOTES
