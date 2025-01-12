@@ -225,7 +225,49 @@ describe('createButton', () => {
 });
 ```
 
-## Testing React using @testing-library/react
+## Testing React Hooks using '@testing-library/react'
+https://mayashavin.com/articles/test-react-hooks-with-vitest
+```
+//React Code
+import { useEffect, useState } from 'react';
+
+export default function useCookie() {
+  const [cookie, setCookie] = useState({});
+
+  useEffect(() => {
+    const cookieData = document.cookie;
+
+    if(cookieData) {
+      const cookieDataJSON = JSON.parse(decodeURIComponent(cookieData) || '');
+
+      setCookie(cookieDataJSON);
+    }
+  }, []);
+
+  return cookie;
+}
+
+//Test
+import { expect, it, describe } from 'vitest';
+import { renderHook } from '@testing-library/react';
+import useCookie from './useCookie';
+
+describe('useCookie', () => {
+  it('should return a cookie value', () => {
+    const {result} = renderHook(() => useCookie());
+
+    expect(result.current.user?.email).toBe('test@test.com');
+  });
+
+  it('should fail with a undefined cookie', () => {
+    const {result} = renderHook(() => useCookie());
+
+    expect(result.current.user?.email).toBeUndefined();
+  });
+});
+```
+
+## Testing React Components using '@testing-library/react'
 If your component does not have a way to identify it for testing, Use `data-testid` to provide the element a name to be used in testing.  __When getting an element using `screen.gtByRole` is a good practice/pattern to use case-insensitive regex incase the casing changes in the button or other changes.__ See example below.
 ```
 //Implementation
